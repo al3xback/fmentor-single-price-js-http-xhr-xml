@@ -1,0 +1,12 @@
+main,
+main > .container {
+	display: flex;
+	flex: auto;
+}
+
+@media (min-width: 48em) {
+	main > .container {
+		justify-content: center;
+		align-items: center;
+	}
+}

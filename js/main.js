@@ -32,12 +32,16 @@ const renderCardContent = (data) => {
 	const parser = new DOMParser();
 	const dataDoc = parser.parseFromString(data, 'text/xml');
 
-	const getElementValue = (parentEl, childEl) => {
-		return parentEl.getElementsByTagName(childEl)[0].childNodes[0]
-			.nodeValue;
+	const getElementValue = (parentEl, name) => {
+		const element = parentEl.getElementsByTagName(name)[0];
+		const hasChildren = !!element.children.length;
+		if (hasChildren) {
+			return [...element.children].map(
+				(item) => item.childNodes[0].nodeValue
+			);
+		}
+		return element.childNodes[0].nodeValue;
 	};
-
-	removeLoading();
 
 	const sectionsData = dataDoc.getElementsByTagName('section');
 	const [joinCommunityData, monthlySubscriptionData, whyUsData] =
@@ -67,8 +71,7 @@ const renderCardContent = (data) => {
 	);
 
 	const whyUsTitle = getElementValue(whyUsData, 'title');
-	const whyUsBenefitsEl = whyUsData.getElementsByTagName('benefits')[0];
-	const whyUsBenefits = whyUsBenefitsEl.children;
+	const whyUsBenefits = getElementValue(whyUsData, 'benefits');
 
 	const cardTemplateNode = document.importNode(cardTemplate.content, true);
 	const cardEl = cardTemplateNode.querySelector('.card');
@@ -147,11 +150,12 @@ const renderCardContent = (data) => {
 
 	for (const benefit of whyUsBenefits) {
 		const sectionWhyUsListItemEl = document.createElement('li');
-		sectionWhyUsListItemEl.textContent = benefit.childNodes[0].nodeValue;
+		sectionWhyUsListItemEl.textContent = benefit;
 
 		sectionWhyUsListEl.appendChild(sectionWhyUsListItemEl);
 	}
 
+	removeLoading();
 	sectionGroupEl.appendChild(sectionMonthlySubscriptionTemplateNode);
 	sectionGroupEl.appendChild(sectionWhyUsTemplateNode);
 	cardEl.prepend(sectionJoinCommunityTemplateNode);

@@ -44,10 +44,13 @@
 .card__subtitle {
 	background-color: transparent;
 	margin-bottom: func.em(12, 15);
-	font-size: func.em(15, var.$font-size-primary);
 	font-weight: var.$font-weight-700;
 	color: var.$color-bright-yellow;
-	line-height: 1.3;
+	line-height: 1.5;
+}
+
+.card__block--join-community .card__desc {
+	font-size: func.em(15, var.$font-size-primary);
 }
 
 .card__group .card__title {
@@ -59,7 +62,6 @@
 	display: flex;
 	align-items: center;
 	margin-top: func.em(-6, var.$font-size-primary);
-	font-size: func.em(16, var.$font-size-primary);
 }
 
 .card__price .num {
@@ -98,6 +100,10 @@
 
 	.card__subtitle {
 		font-size: func.em(18, var.$font-size-primary);
+	}
+
+	.card__block--join-community .card__desc {
+		font-size: inherit;
 	}
 
 	.card__group {

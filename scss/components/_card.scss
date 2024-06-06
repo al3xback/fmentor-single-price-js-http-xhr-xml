@@ -43,7 +43,7 @@
 
 .card__subtitle {
 	background-color: transparent;
-	margin-bottom: func.em(12, 15);
+	margin-bottom: func.em(12, var.$font-size-primary);
 	font-weight: var.$font-weight-700;
 	color: var.$color-bright-yellow;
 	line-height: 1.5;
@@ -66,7 +66,7 @@
 
 .card__price .num {
 	margin-right: func.em(12, 31);
-	font-size: func.em(31, 16);
+	font-size: func.em(31, var.$font-size-primary);
 	font-weight: var.$font-weight-700;
 }
 
